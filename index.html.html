@@ -1,0 +1,1310 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>thakur riya - Sky MCQ Examination & Learning Platform</title>
+  <!-- Google Font (Fallback to standard system fonts offline) -->
+  <style>
+    :root {
+      --sky-50: #f0f9ff;
+      --sky-100: #e0f2fe;
+      --sky-200: #bae6fd;
+      --sky-400: #38bdf8;
+      --sky-500: #0ea5e9;
+      --sky-600: #0284c7;
+      --sky-700: #0369a1;
+      --navy-900: #0f172a;
+      --navy-800: #1e293b;
+      --slate-50: #f8fafc;
+      --slate-100: #f1f5f9;
+      --slate-200: #e2e8f0;
+      --slate-500: #64748b;
+      --slate-600: #475569;
+      --slate-700: #334155;
+      --slate-800: #1e293b;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    body {
+      background-color: var(--slate-50);
+      color: var(--navy-900);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* TOP NAVBAR */
+    header {
+      background: rgba(255, 255, 255, 0.96);
+      backdrop-filter: blur(8px);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      border-bottom: 1px solid var(--sky-100);
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+    .header-inner {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 0 20px;
+      height: 70px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .brand-group {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      cursor: pointer;
+    }
+    .brand-icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--sky-400), var(--sky-600));
+      color: white;
+      font-size: 19px;
+      font-weight: 900;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 10px rgba(14, 165, 233, 0.25);
+    }
+    .brand-text {
+      font-size: 24px;
+      font-weight: 900;
+      color: var(--navy-900);
+      letter-spacing: -0.5px;
+    }
+    .brand-text span {
+      color: var(--sky-500);
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      list-style: none;
+    }
+    .nav-link {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--slate-600);
+      text-decoration: none;
+      cursor: pointer;
+      transition: color 0.2s;
+    }
+    .nav-link:hover, .nav-link.active {
+      color: var(--sky-600);
+    }
+    .btn-auth {
+      background: linear-gradient(135deg, var(--sky-500), var(--sky-600));
+      color: white;
+      padding: 9px 20px;
+      border-radius: 10px;
+      font-size: 14px;
+      font-weight: 700;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 2px 6px rgba(14, 165, 233, 0.3);
+      transition: all 0.2s;
+    }
+    .btn-auth:hover {
+      box-shadow: 0 4px 12px rgba(14, 165, 233, 0.4);
+      transform: translateY(-1px);
+    }
+
+    /* MAIN CONTAINER */
+    main {
+      flex: 1;
+    }
+
+    .view-page {
+      display: none;
+    }
+    .view-page.active {
+      display: block;
+    }
+
+    /* HERO SECTION */
+    .hero-section {
+      background: linear-gradient(135deg, #082f49 0%, #0369a1 60%, #0284c7 100%);
+      color: white;
+      padding: 60px 20px 80px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-section::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(rgba(56, 189, 248, 0.2) 1px, transparent 1px);
+      background-size: 24px 24px;
+      opacity: 0.8;
+    }
+    .hero-content {
+      position: relative;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    /* PROFILE PHOTO UPLOADER */
+    .avatar-upload-container {
+      margin-bottom: 24px;
+      display: inline-block;
+      text-align: center;
+    }
+    .avatar-wrapper {
+      position: relative;
+      width: 120px;
+      height: 120px;
+      margin: 0 auto 10px;
+      cursor: pointer;
+    }
+    .avatar-circle {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      border: 4px solid var(--sky-200);
+      background: rgba(3, 105, 161, 0.7);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      backdrop-filter: blur(4px);
+      transition: transform 0.2s;
+    }
+    .avatar-circle:hover {
+      transform: scale(1.05);
+    }
+    .avatar-circle img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .camera-badge {
+      position: absolute;
+      bottom: 2px;
+      right: 2px;
+      background: var(--sky-500);
+      color: white;
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      border: 3px solid white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 15px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    }
+    .avatar-hint {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--sky-100);
+      cursor: pointer;
+    }
+    .hero-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 16px;
+      border-radius: 9999px;
+      background: rgba(255, 255, 255, 0.15);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--sky-100);
+      margin-bottom: 20px;
+    }
+    .hero-pill span {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--sky-400);
+    }
+    .hero-heading {
+      font-size: 46px;
+      font-weight: 900;
+      line-height: 1.2;
+      margin-bottom: 16px;
+      letter-spacing: -1px;
+    }
+    .hero-subtext {
+      font-size: 17px;
+      color: #e0f2fe;
+      line-height: 1.6;
+      max-width: 680px;
+      margin: 0 auto 30px;
+      font-weight: 400;
+    }
+
+    /* SEARCH BAR */
+    .search-box {
+      max-width: 600px;
+      margin: 0 auto;
+      background: white;
+      border-radius: 16px;
+      padding: 6px 8px 6px 18px;
+      display: flex;
+      align-items: center;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.2);
+    }
+    .search-box input {
+      border: none;
+      outline: none;
+      width: 100%;
+      font-size: 15px;
+      color: var(--navy-900);
+    }
+    .btn-search {
+      background: var(--sky-500);
+      color: white;
+      border: none;
+      padding: 10px 22px;
+      border-radius: 12px;
+      font-weight: 700;
+      font-size: 14px;
+      cursor: pointer;
+    }
+
+    /* STATS STRIP */
+    .stats-strip {
+      max-width: 1100px;
+      margin: -35px auto 40px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      padding: 0 20px;
+      position: relative;
+      z-index: 10;
+    }
+    .stat-card {
+      background: white;
+      padding: 20px 16px;
+      border-radius: 16px;
+      border: 1px solid var(--slate-200);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.04);
+      text-align: center;
+    }
+    .stat-num {
+      font-size: 28px;
+      font-weight: 900;
+      color: var(--sky-600);
+    }
+    .stat-lbl {
+      font-size: 12px;
+      color: var(--slate-500);
+      font-weight: 700;
+      text-transform: uppercase;
+      margin-top: 4px;
+    }
+
+    /* CONTENT LAYOUT */
+    .page-container {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 40px 20px;
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 28px;
+    }
+    .section-title {
+      font-size: 28px;
+      font-weight: 900;
+      color: var(--navy-900);
+    }
+    .section-desc {
+      font-size: 15px;
+      color: var(--slate-600);
+      margin-top: 4px;
+    }
+
+    /* CATEGORIES GRID */
+    .categories-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 24px;
+    }
+    .category-card {
+      background: white;
+      border-radius: 18px;
+      padding: 24px;
+      border: 1px solid var(--slate-200);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+      cursor: pointer;
+      transition: all 0.25s ease;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .category-card:hover {
+      transform: translateY(-5px);
+      border-color: var(--sky-400);
+      box-shadow: 0 12px 24px rgba(14, 165, 233, 0.12);
+    }
+    .cat-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+    .cat-icon-box {
+      width: 52px;
+      height: 52px;
+      border-radius: 14px;
+      background: var(--sky-50);
+      color: var(--sky-600);
+      font-size: 26px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .cat-badge {
+      font-size: 11px;
+      font-weight: 800;
+      color: var(--sky-600);
+      background: var(--sky-50);
+      border: 1px solid var(--sky-200);
+      padding: 4px 10px;
+      border-radius: 9999px;
+    }
+    .cat-title {
+      font-size: 19px;
+      font-weight: 800;
+      margin-bottom: 6px;
+      color: var(--slate-800);
+    }
+    .cat-details {
+      font-size: 13px;
+      color: var(--slate-500);
+      margin-bottom: 20px;
+      line-height: 1.4;
+    }
+    .cat-btn {
+      color: var(--sky-600);
+      font-weight: 700;
+      font-size: 13px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 14px;
+      border-top: 1px solid var(--slate-100);
+    }
+
+    /* WHY CHOOSE US (FEATURES) */
+    .features-strip {
+      background: white;
+      border-top: 1px solid var(--slate-200);
+      border-bottom: 1px solid var(--slate-200);
+      padding: 60px 20px;
+      margin-top: 60px;
+    }
+    .features-grid {
+      max-width: 1240px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 30px;
+    }
+    .feature-card {
+      padding: 24px;
+      border-radius: 16px;
+      background: var(--slate-50);
+      border: 1px solid var(--slate-200);
+    }
+    .feature-icon {
+      font-size: 32px;
+      margin-bottom: 14px;
+    }
+    .feature-title {
+      font-size: 18px;
+      font-weight: 800;
+      margin-bottom: 8px;
+    }
+    .feature-text {
+      font-size: 14px;
+      color: var(--slate-600);
+      line-height: 1.5;
+    }
+
+    /* TEST LIST VIEW */
+    .test-card {
+      background: white;
+      border-radius: 16px;
+      padding: 20px 24px;
+      border: 1px solid var(--slate-200);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 16px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+    }
+    .btn-back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--sky-600);
+      font-weight: 700;
+      margin-bottom: 24px;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    /* EXAM INTERFACE */
+    .exam-wrapper {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 30px 20px;
+    }
+    .exam-topbar {
+      background: white;
+      border-radius: 16px;
+      padding: 18px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border: 1px solid var(--slate-200);
+      margin-bottom: 24px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+    }
+    .timer-badge {
+      background: #fee2e2;
+      color: #b91c1c;
+      font-size: 20px;
+      font-weight: 900;
+      font-family: monospace;
+      padding: 8px 18px;
+      border-radius: 10px;
+      border: 1px solid #fecaca;
+    }
+    .exam-columns {
+      display: grid;
+      grid-template-columns: 1fr 300px;
+      gap: 24px;
+    }
+    .q-card {
+      background: white;
+      border-radius: 18px;
+      padding: 32px;
+      border: 1px solid var(--slate-200);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+    }
+    .option-row {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 16px 20px;
+      border: 2px solid var(--slate-200);
+      border-radius: 14px;
+      margin-bottom: 14px;
+      cursor: pointer;
+      font-size: 15px;
+      font-weight: 500;
+      transition: all 0.2s;
+    }
+    .option-row:hover {
+      border-color: var(--sky-400);
+      background: var(--sky-50);
+    }
+    .option-row.selected {
+      border-color: var(--sky-500);
+      background: var(--sky-100);
+      font-weight: 700;
+    }
+    .palette-box {
+      background: white;
+      border-radius: 18px;
+      padding: 24px;
+      border: 1px solid var(--slate-200);
+      height: fit-content;
+    }
+    .palette-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      margin-top: 16px;
+    }
+    .p-btn {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      border: 1px solid var(--slate-200);
+      background: var(--slate-50);
+      font-weight: 700;
+      cursor: pointer;
+      font-size: 15px;
+    }
+    .p-btn.active {
+      border: 2px solid var(--sky-600);
+    }
+    .p-btn.answered {
+      background: var(--sky-500);
+      color: white;
+      border-color: var(--sky-500);
+    }
+
+    /* RESULT CARD */
+    .result-card {
+      max-width: 620px;
+      margin: 40px auto;
+      background: white;
+      border-radius: 24px;
+      padding: 44px 30px;
+      text-align: center;
+      border: 1px solid var(--slate-200);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+    }
+    .result-score-big {
+      font-size: 72px;
+      font-weight: 900;
+      color: var(--sky-600);
+      margin: 16px 0;
+    }
+    .stat-row {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      background: var(--slate-50);
+      border-radius: 16px;
+      padding: 20px;
+      margin: 24px 0;
+      border: 1px solid var(--slate-200);
+    }
+
+    /* ABOUT & CONTACT PAGES */
+    .info-card {
+      background: white;
+      border-radius: 20px;
+      padding: 40px;
+      border: 1px solid var(--slate-200);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    .contact-info-strip {
+      background: var(--sky-50);
+      border: 1px solid var(--sky-200);
+      border-radius: 16px;
+      padding: 24px;
+      margin: 24px 0;
+    }
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 16px;
+      margin-bottom: 12px;
+    }
+
+    /* FOOTER */
+    footer {
+      background: #091e32;
+      color: #94a3b8;
+      border-top: 1px solid #1e3a5f;
+      padding-top: 60px;
+      margin-top: auto;
+    }
+    .footer-grid {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 0 20px 40px;
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1.5fr;
+      gap: 40px;
+    }
+    .footer-brand-title {
+      font-size: 22px;
+      font-weight: 900;
+      color: white;
+      margin-bottom: 14px;
+    }
+    .footer-about {
+      font-size: 14px;
+      line-height: 1.6;
+      color: #94a3b8;
+      margin-bottom: 20px;
+    }
+    .footer-heading {
+      font-size: 13px;
+      font-weight: 800;
+      color: var(--sky-400);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 18px;
+    }
+    .footer-list {
+      list-style: none;
+    }
+    .footer-list li {
+      margin-bottom: 10px;
+    }
+    .footer-list a {
+      color: #cbd5e1;
+      text-decoration: none;
+      font-size: 14px;
+      cursor: pointer;
+      transition: color 0.2s;
+    }
+    .footer-list a:hover {
+      color: var(--sky-400);
+    }
+    .contact-box-footer {
+      background: #0f2c4a;
+      border: 1px solid #1e456e;
+      border-radius: 14px;
+      padding: 16px;
+      font-size: 13px;
+      color: #e0f2fe;
+    }
+    .contact-box-footer a {
+      color: var(--sky-400);
+      text-decoration: none;
+      font-weight: 700;
+    }
+    .bottom-bar {
+      border-top: 1px solid #132d4b;
+      padding: 20px;
+      text-align: center;
+      font-size: 13px;
+      color: #64748b;
+    }
+
+    @media (max-width: 900px) {
+      .hero-heading { font-size: 34px; }
+      .stats-strip { grid-template-columns: repeat(2, 1fr); margin-top: -20px; }
+      .features-grid { grid-template-columns: 1fr; }
+      .exam-columns { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr; gap: 30px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <div class="header-inner">
+      <div class="brand-group" onclick="navTo('home')">
+        <div class="brand-icon">TR</div>
+        <div class="brand-text">thakur <span>riya</span></div>
+      </div>
+
+      <nav>
+        <ul class="nav-links">
+          <li><span class="nav-link active" id="nav-home" onclick="navTo('home')">Home</span></li>
+          <li><span class="nav-link" id="nav-cats" onclick="navTo('categories')">All Categories</span></li>
+          <li><span class="nav-link" id="nav-about" onclick="navTo('about')">About Us</span></li>
+          <li><span class="nav-link" id="nav-contact" onclick="navTo('contact')">Contact</span></li>
+        </ul>
+      </nav>
+
+      <div style="display: flex; align-items: center; gap: 12px;">
+        <div style="background: var(--sky-50); border: 1px solid var(--sky-200); padding: 6px 14px; border-radius: 10px; font-size: 13px; font-weight: 700; color: var(--sky-700); display: flex; align-items: center; gap: 6px; cursor: pointer;" title="Aapka Saved Email ID (Click karke copy karein)" onclick="copyEmail()">
+          <span>👤</span>
+          <span id="headerUserEmail">rthakur@gmail.com</span>
+          <span style="font-size: 10px; background: var(--sky-200); color: var(--sky-800); padding: 2px 6px; border-radius: 4px; margin-left: 2px;">Saved</span>
+        </div>
+        <button class="btn-auth" onclick="navTo('categories')">Start Practice</button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+    <!-- 1. HOME VIEW -->
+    <div id="page-home" class="view-page active">
+      
+      <!-- HERO SECTION -->
+      <section class="hero-section">
+        <div class="hero-content">
+          
+          <!-- IMAGE UPLOADER WIDGET -->
+          <div class="avatar-upload-container">
+            <div class="avatar-wrapper" onclick="document.getElementById('avatarFileInput').click()" title="Click karke photo lagayein">
+              <div class="avatar-circle" id="userPhotoBox">
+                <span style="font-size: 40px;">📷</span>
+              </div>
+              <div class="camera-badge">＋</div>
+            </div>
+            <input type="file" id="avatarFileInput" accept="image/*" style="display:none;" onchange="onUserUploadImage(event)">
+            <p class="avatar-hint" onclick="document.getElementById('avatarFileInput').click()">
+              👈 Click circle to upload your photo directly on page
+            </p>
+          </div>
+
+          <div class="hero-pill">
+            <span></span> Official Exam Platform by thakur riya
+          </div>
+
+          <h1 class="hero-heading">
+            Prepare Smarter.<br>Practice Better. Score Higher.
+          </h1>
+
+          <p class="hero-subtext">
+            India's premier Sky Themed full-stack examination and MCQ training portal. Experience real-time timers, question palettes, instant analytics, and verified answer keys.
+          </p>
+
+          <!-- SEARCH BAR -->
+          <div class="search-box">
+            <input type="text" id="homeSearchInput" placeholder="Search MCQ, Subject, Programming Language (e.g. JavaScript, Python, GK)..." oninput="filterCategories()">
+            <button class="btn-search" onclick="navTo('categories')">Search Tests</button>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- STATS STRIP -->
+      <div class="stats-strip">
+        <div class="stat-card">
+          <div class="stat-num">50,000+</div>
+          <div class="stat-lbl">Verified Questions</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">250+</div>
+          <div class="stat-lbl">Mock Exam Tests</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">100%</div>
+          <div class="stat-lbl">Offline Enabled</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">Instant</div>
+          <div class="stat-lbl">Score Analysis</div>
+        </div>
+      </div>
+
+      <!-- POPULAR CATEGORIES SECTION -->
+      <div class="page-container">
+        <div class="section-header">
+          <div>
+            <h2 class="section-title">Popular Exam Categories</h2>
+            <p class="section-desc">Select any subject to view full mock exam papers:</p>
+          </div>
+          <button class="btn-auth" onclick="navTo('categories')">View All Categories ➔</button>
+        </div>
+
+        <div class="categories-grid" id="homeCategoriesGrid">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+
+      <!-- FEATURES STRIP (WHY CHOOSE US) -->
+      <section class="features-strip">
+        <div class="features-grid">
+          <div class="feature-card">
+            <div class="feature-icon">⏱️</div>
+            <h3 class="feature-title">Live Countdown Timer</h3>
+            <p class="feature-text">Practice under strict examination pressure with automated freeze alerts and auto-submit safety safeguards.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">🧭</div>
+            <h3 class="feature-title">Exam Question Palette</h3>
+            <p class="feature-text">Visual question grid showing Answered, Unanswered, and Marked states just like real government and campus exams.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">📊</div>
+            <h3 class="feature-title">Detailed Score Report</h3>
+            <p class="feature-text">Instant percentile calculation, speed tracking, accuracy breakdown, and clear explanations for every correct answer.</p>
+          </div>
+        </div>
+      </section>
+
+    </div>
+
+    <!-- 2. ALL CATEGORIES VIEW -->
+    <div id="page-categories" class="view-page">
+      <div class="page-container">
+        <div class="section-header">
+          <div>
+            <h2 class="section-title">All Examination Categories</h2>
+            <p class="section-desc">Explore hundreds of topic-wise mock tests and preparation materials:</p>
+          </div>
+        </div>
+        <div class="categories-grid" id="allCategoriesGrid">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. TESTS LIST VIEW -->
+    <div id="page-testlist" class="view-page">
+      <div class="page-container" style="max-width: 900px;">
+        <span class="btn-back-link" onclick="navTo('categories')">← Back to All Categories</span>
+        <h2 class="section-title" id="selectedCatTitle">Computer Fundamentals Tests</h2>
+        <p class="section-desc" style="margin-bottom: 24px;">Select any test to begin your examination:</p>
+        <div id="testItemsContainer">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+    </div>
+
+    <!-- 4. EXAM ENGINE VIEW -->
+    <div id="page-exam" class="view-page">
+      <div class="exam-wrapper">
+        <div class="exam-topbar">
+          <div>
+            <h3 style="font-size: 19px; font-weight: 800;" id="activeExamTitle">JavaScript Mock Test 1</h3>
+            <p style="font-size: 13px; color: var(--slate-500);">thakur riya Real-time Examination Engine</p>
+          </div>
+          <div class="timer-badge" id="examClock">10:00</div>
+        </div>
+
+        <div class="exam-columns">
+          <div class="q-card">
+            <div style="font-size: 13px; font-weight: 800; color: var(--sky-600); text-transform: uppercase; margin-bottom: 8px;" id="qIndexLabel">
+              Question 1 of 5
+            </div>
+            <h3 style="font-size: 19px; font-weight: 700; margin-bottom: 24px; line-height: 1.4;" id="qTextLabel">
+              Question text goes here?
+            </h3>
+
+            <div id="optionsContainer">
+              <!-- Options rendered here -->
+            </div>
+
+            <div style="display: flex; justify-content: space-between; margin-top: 30px; padding-top: 20px; border-top: 1px solid var(--slate-100);">
+              <button class="btn-auth" style="background: white; color: var(--slate-700); border: 1px solid var(--slate-200); box-shadow: none;" id="btnPrevQ" onclick="stepQuestion(-1)">Previous</button>
+              <div style="display: flex; gap: 12px;">
+                <button class="btn-auth" id="btnNextQ" onclick="stepQuestion(1)">Next Question</button>
+                <button class="btn-auth" style="background: #16a34a;" onclick="submitExam()">Submit Test</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="palette-box">
+            <h4 style="font-size: 16px; font-weight: 800; margin-bottom: 12px;">Question Palette</h4>
+            <div class="palette-grid" id="paletteNumbersGrid">
+              <!-- Numbers -->
+            </div>
+            <div style="margin-top: 24px; font-size: 12px; color: var(--slate-500); line-height: 1.8;">
+              <span style="display: inline-block; width: 12px; height: 12px; background: var(--sky-500); border-radius: 3px; vertical-align: middle; margin-right: 6px;"></span> Answered<br>
+              <span style="display: inline-block; width: 12px; height: 12px; background: var(--slate-100); border: 1px solid var(--slate-200); border-radius: 3px; vertical-align: middle; margin-right: 6px;"></span> Not Answered
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5. RESULT VIEW -->
+    <div id="page-result" class="view-page">
+      <div class="result-card">
+        <h2 style="font-size: 28px; font-weight: 900;">Examination Completed!</h2>
+        <p style="color: var(--slate-500); margin-top: 6px;">Aapka result safalta-purvak generate ho gaya hai.</p>
+
+        <div class="result-score-big" id="resPercent">80%</div>
+        <p style="font-size: 18px; font-weight: 800;" id="resStatusBadge">Status: PASSED (Shaandar!)</p>
+
+        <div class="stat-row">
+          <div>
+            <div style="font-size: 24px; font-weight: 900; color: var(--sky-600);" id="resMarks">4 / 5</div>
+            <div style="font-size: 12px; font-weight: 700; color: var(--slate-500); text-transform: uppercase;">Total Score</div>
+          </div>
+          <div>
+            <div style="font-size: 24px; font-weight: 900; color: #16a34a;" id="resCorrect">4</div>
+            <div style="font-size: 12px; font-weight: 700; color: var(--slate-500); text-transform: uppercase;">Correct</div>
+          </div>
+          <div>
+            <div style="font-size: 24px; font-weight: 900; color: #dc2626;" id="resWrong">1</div>
+            <div style="font-size: 12px; font-weight: 700; color: var(--slate-500); text-transform: uppercase;">Incorrect</div>
+          </div>
+        </div>
+
+        <button class="btn-auth" style="padding: 12px 30px; font-size: 16px;" onclick="navTo('categories')">Take Another Test</button>
+      </div>
+    </div>
+
+    <!-- 6. ABOUT PAGE -->
+    <div id="page-about" class="view-page">
+      <div class="page-container">
+        <div class="info-card">
+          <h2 class="section-title" style="margin-bottom: 16px;">About thakur riya Platform</h2>
+          <p style="color: var(--slate-600); line-height: 1.7; font-size: 15px; margin-bottom: 20px;">
+            <strong>thakur riya</strong> is India's premier examination practice engine designed specifically for students, competitive exam aspirants, and software engineering candidates.
+          </p>
+          <p style="color: var(--slate-600); line-height: 1.7; font-size: 15px; margin-bottom: 20px;">
+            Humara mission hai ki har student ko aisi exam-ready environment di jaye jisme real countdown timer, structured question palettes, aur instant accuracy reports miley.
+          </p>
+          <div class="contact-info-strip">
+            <h4 style="font-weight: 800; margin-bottom: 12px; color: var(--sky-700);">Official Details:</h4>
+            <div class="contact-item">🏢 <strong>Platform:</strong> thakur riya MCQ Based Engine</div>
+            <div class="contact-item">📧 <strong>Email:</strong> <a href="mailto:rthakur@gmail.com" style="color:var(--sky-600); font-weight:700;">rthakur@gmail.com</a></div>
+            <div class="contact-item">📞 <strong>Phone:</strong> <a href="tel:9076671050" style="color:var(--sky-600); font-weight:700;">9076671050</a></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 7. CONTACT PAGE -->
+    <div id="page-contact" class="view-page">
+      <div class="page-container">
+        <div class="info-card">
+          <h2 class="section-title" style="margin-bottom: 16px;">Contact Support</h2>
+          <p style="color: var(--slate-600); font-size: 15px; margin-bottom: 24px;">
+            Agar aapko kisi bhi test, question ya platform sambandhi query ho, toh humse sampark karein:
+          </p>
+          
+          <div class="contact-info-strip">
+            <div class="contact-item">📧 <strong>Email Address:</strong> <a href="mailto:rthakur@gmail.com" style="color:var(--sky-600); font-weight:700; margin-left:6px;">rthakur@gmail.com</a></div>
+            <div class="contact-item">📞 <strong>Helpdesk Phone:</strong> <a href="tel:9076671050" style="color:var(--sky-600); font-weight:700; margin-left:6px;">+91 9076671050</a></div>
+            <div class="contact-item">📍 <strong>Headquarters:</strong> New Delhi, India</div>
+            <div class="contact-item">🕒 <strong>Available Timings:</strong> 24x7 Customer Support</div>
+          </div>
+
+          <div style="background: var(--slate-50); border: 1px solid var(--slate-200); border-radius: 16px; padding: 24px; margin-top: 24px;">
+            <h4 style="font-weight: 800; margin-bottom: 14px;">Direct Feedback Form</h4>
+            <input type="text" placeholder="Your Full Name" style="width: 100%; padding: 12px; border: 1px solid var(--slate-200); border-radius: 10px; margin-bottom: 12px; outline: none;">
+            <input type="email" placeholder="Your Email Address" style="width: 100%; padding: 12px; border: 1px solid var(--slate-200); border-radius: 10px; margin-bottom: 12px; outline: none;">
+            <textarea placeholder="Write your message or query here..." rows="4" style="width: 100%; padding: 12px; border: 1px solid var(--slate-200); border-radius: 10px; margin-bottom: 14px; outline: none; font-family: inherit;"></textarea>
+            <button class="btn-auth" style="width: 100%; padding: 12px;" onclick="alert('Dhanyawad! Aapka sandesh prapt ho gaya hai. Hum jaldi sampark karenge.')">Send Message</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- FULL FOOTER WITH ABOUT & CONTACT DETAILS -->
+  <footer>
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand-title">thakur riya</div>
+        <p class="footer-about">
+          Next-generation Sky Themed MCQ Examination & Educational Assessment Platform. Practice thousands of hand-picked questions, improve accuracy, and track performance effortlessly.
+        </p>
+        <div class="contact-box-footer">
+          <p style="margin-bottom: 4px;">📧 Email: <a href="mailto:rthakur@gmail.com">rthakur@gmail.com</a></p>
+          <p>📞 Phone: <a href="tel:9076671050">+91 9076671050</a></p>
+        </div>
+      </div>
+
+      <div>
+        <h4 class="footer-heading">Quick Links</h4>
+        <ul class="footer-list">
+          <li><a onclick="navTo('home')">Home Dashboard</a></li>
+          <li><a onclick="navTo('categories')">All Categories</a></li>
+          <li><a onclick="navTo('about')">About Us</a></li>
+          <li><a onclick="navTo('contact')">Contact Support</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="footer-heading">Exam Categories</h4>
+        <ul class="footer-list">
+          <li><a onclick="openCatTests('comp', 'Computer Fundamentals')">Computer Fundamentals</a></li>
+          <li><a onclick="openCatTests('js', 'JavaScript & Web Tech')">JavaScript Tech</a></li>
+          <li><a onclick="openCatTests('react', 'React.js Framework')">React Framework</a></li>
+          <li><a onclick="openCatTests('gk', 'General Knowledge')">General Knowledge</a></li>
+          <li><a onclick="openCatTests('py', 'Python Programming')">Python Programming</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="footer-heading">Direct Contact</h4>
+        <p style="font-size: 13px; color: #94a3b8; line-height: 1.6; margin-bottom: 12px;">
+          For exam guidelines, test queries or assistance, reach out directly:
+        </p>
+        <p style="font-size: 14px; color: white; font-weight: 700; margin-bottom: 4px;">
+          Call: +91 9076671050
+        </p>
+        <p style="font-size: 13px; color: var(--sky-400);">
+          rthakur@gmail.com
+        </p>
+      </div>
+    </div>
+
+    <div class="bottom-bar">
+      <p>&copy; 2026 thakur riya. All Rights Reserved. Offline Standalone Notepad Edition.</p>
+    </div>
+  </footer>
+
+  <script>
+    // DATA REPOSITORY
+    const categories = [
+      { id: "comp", name: "Computer Fundamentals", icon: "💻", count: 18, qCount: 450, badge: "Popular", desc: "Hardware, software, memory, OS and computer architecture fundamentals." },
+      { id: "js", name: "JavaScript & Web Tech", icon: "⚡", count: 24, qCount: 680, badge: "Trending", desc: "Core JS, ES6+, DOM manipulation, async programming and closures." },
+      { id: "react", name: "React.js Framework", icon: "⚛️", count: 16, qCount: 420, badge: "Hot", desc: "Components, Props, Hooks (useState, useEffect), Virtual DOM and Redux." },
+      { id: "py", name: "Python Programming", icon: "🐍", count: 20, qCount: 520, badge: "Featured", desc: "Data types, loops, OOPs, list comprehensions, and Python scripting." },
+      { id: "gk", name: "General Knowledge (GK)", icon: "🌍", count: 35, qCount: 950, badge: "Govt Exam", desc: "Indian history, geography, constitution, science and world affairs." },
+      { id: "apt", name: "Quantitative Aptitude", icon: "📐", count: 28, qCount: 750, badge: "Top Rated", desc: "Percentages, profit & loss, ratio, time & work, and algebra." },
+      { id: "reasoning", name: "Logical Reasoning", icon: "🧠", count: 25, qCount: 640, badge: "Essential", desc: "Coding-decoding, blood relations, syllogism, and series completion." },
+      { id: "db", name: "Database & SQL", icon: "🗄️", count: 15, qCount: 380, badge: "Tech", desc: "SQL queries, normalization, indexing, joins, and transactions." }
+    ];
+
+    const questionsDB = {
+      comp: [
+        { q: "What does CPU stand for in computer hardware?", opts: ["Central Process Unit", "Central Processing Unit", "Computer Personal Unit", "Control Program Unit"], ans: 1 },
+        { q: "Which of the following is strictly an input device?", opts: ["Monitor", "Printer", "Keyboard", "Speaker"], ans: 2 },
+        { q: "1 Byte is numerically equal to how many bits?", opts: ["4 bits", "8 bits", "16 bits", "32 bits"], ans: 1 },
+        { q: "What is the permanent non-volatile memory in a PC?", opts: ["RAM", "ROM", "Cache", "Virtual Memory"], ans: 1 },
+        { q: "Which shortcut key is standardly used to refresh in Windows?", opts: ["F2", "F5", "F8", "F12"], ans: 1 }
+      ],
+      js: [
+        { q: "Which JavaScript keyword declares a block-scoped variable that cannot be reassigned?", opts: ["var", "let", "const", "static"], ans: 2 },
+        { q: "What is the result of typeof null in JavaScript?", opts: ["'null'", "'undefined'", "'object'", "'boolean'"], ans: 2 },
+        { q: "Which array method adds one or more elements to the end?", opts: ["push()", "pop()", "shift()", "unshift()"], ans: 0 },
+        { q: "Which method parses a JSON string into a JavaScript object?", opts: ["JSON.stringify()", "JSON.parse()", "JSON.object()", "JSON.to()"], ans: 1 },
+        { q: "Which operator checks both value and type equality in JS?", opts: ["=", "==", "===", "!=="], ans: 2 }
+      ],
+      react: [
+        { q: "Which hook is used for performing side effects in functional components?", opts: ["useState", "useMemo", "useContext", "useEffect"], ans: 3 },
+        { q: "In React, data flows in which direction?", opts: ["Bidirectional", "Unidirectional (Top to Bottom)", "Bottom to Top", "Random"], ans: 1 },
+        { q: "What is used in React to improve rendering performance?", opts: ["Real DOM", "Virtual DOM", "Shadow DOM", "Native DOM"], ans: 1 },
+        { q: "Which keyword is used to pass data from parent to child component?", opts: ["State", "Props", "Refs", "Context"], ans: 1 },
+        { q: "How do you declare a state variable in a functional component?", opts: ["this.state", "useState()", "createState()", "initState()"], ans: 1 }
+      ],
+      gk: [
+        { q: "Which city is the national capital of India?", opts: ["Mumbai", "New Delhi", "Kolkata", "Bengaluru"], ans: 1 },
+        { q: "Which celestial body is known as the Red Planet?", opts: ["Venus", "Mars", "Jupiter", "Saturn"], ans: 1 },
+        { q: "Who is revered as the Chief Architect of the Indian Constitution?", opts: ["Mahatma Gandhi", "Dr. B.R. Ambedkar", "Jawaharlal Nehru", "Sardar Patel"], ans: 1 },
+        { q: "Which is the national animal of India?", opts: ["Asiatic Lion", "Royal Bengal Tiger", "Elephant", "Snow Leopard"], ans: 1 },
+        { q: "Which is the longest river flowing in India?", opts: ["Yamuna", "Ganga", "Godavari", "Brahmaputra"], ans: 1 }
+      ]
+    };
+
+    // STATE
+    let currentCatId = "comp";
+    let activeQuestions = [];
+    let curQ = 0;
+    let userAnswers = {};
+    let timerId = null;
+    let secondsLeft = 600;
+
+    // NAVIGATION
+    function navTo(pageId) {
+      document.querySelectorAll('.view-page').forEach(el => el.classList.remove('active'));
+      document.querySelectorAll('.nav-link').forEach(el => el.classList.remove('active'));
+
+      const target = document.getElementById('page-' + pageId);
+      if (target) target.classList.add('active');
+
+      const navLink = document.getElementById('nav-' + pageId);
+      if (navLink) navLink.classList.add('active');
+
+      window.scrollTo(0, 0);
+    }
+
+    // PHOTO UPLOAD
+    function onUserUploadImage(e) {
+      const file = e.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(evt) {
+          const dataUrl = evt.target.result;
+          document.getElementById('userPhotoBox').innerHTML = '<img src="' + dataUrl + '" alt="Profile">';
+          try {
+            localStorage.setItem('thakur_riya_user_photo', dataUrl);
+          } catch(err){}
+        };
+        reader.readAsDataURL(file);
+      }
+    }
+
+    // RENDER CATEGORIES
+    function buildCategories(containerId, list) {
+      const el = document.getElementById(containerId);
+      if (!el) return;
+      el.innerHTML = '';
+
+      list.forEach(c => {
+        const card = document.createElement('div');
+        card.className = 'category-card';
+        card.onclick = () => openCatTests(c.id, c.name);
+        card.innerHTML = `
+          <div>
+            <div class="cat-head">
+              <div class="cat-icon-box">${c.icon}</div>
+              <span class="cat-badge">${c.badge}</span>
+            </div>
+            <div class="cat-title">${c.name}</div>
+            <p class="cat-details">${c.desc}</p>
+          </div>
+          <div class="cat-btn">
+            <span>📝 ${c.count} Mock Tests</span>
+            <span>Explore ➔</span>
+          </div>
+        `;
+        el.appendChild(card);
+      });
+    }
+
+    function filterCategories() {
+      const q = document.getElementById('homeSearchInput').value.toLowerCase();
+      const filtered = categories.filter(c => c.name.toLowerCase().includes(q) || c.desc.toLowerCase().includes(q));
+      buildCategories('homeCategoriesGrid', filtered);
+    }
+
+    function openCatTests(catId, catName) {
+      currentCatId = catId;
+      document.getElementById('selectedCatTitle').innerText = catName + " Mock Tests";
+      const container = document.getElementById('testItemsContainer');
+      container.innerHTML = '';
+
+      for (let i = 1; i <= 3; i++) {
+        const card = document.createElement('div');
+        card.className = 'test-card';
+        card.innerHTML = `
+          <div>
+            <h3 style="font-size: 18px; font-weight: 800; margin-bottom: 4px;">${catName} - Official Test ${i}</h3>
+            <p style="font-size: 13px; color: var(--slate-500);">5 Questions • 10 Minutes • Full Verification • Instant Score</p>
+          </div>
+          <button class="btn-auth" onclick="startExamEngine('${catName} - Official Test ${i}')">Start Test Now</button>
+        `;
+        container.appendChild(card);
+      }
+
+      navTo('testlist');
+    }
+
+    // EXAM ENGINE LOGIC
+    function startExamEngine(title) {
+      document.getElementById('activeExamTitle').innerText = title;
+      activeQuestions = questionsDB[currentCatId] || questionsDB['comp'];
+      curQ = 0;
+      userAnswers = {};
+      secondsLeft = 600;
+
+      clearInterval(timerId);
+      timerId = setInterval(() => {
+        secondsLeft--;
+        const m = Math.floor(secondsLeft / 60);
+        const s = secondsLeft % 60;
+        document.getElementById('examClock').innerText = 
+          (m < 10 ? '0' : '') + m + ':' + (s < 10 ? '0' : '') + s;
+
+        if (secondsLeft <= 0) {
+          clearInterval(timerId);
+          submitExam();
+        }
+      }, 1000);
+
+      renderQ();
+      renderPalette();
+      navTo('exam');
+    }
+
+    function renderQ() {
+      const q = activeQuestions[curQ];
+      document.getElementById('qIndexLabel').innerText = `Question ${curQ + 1} of ${activeQuestions.length}`;
+      document.getElementById('qTextLabel').innerText = q.q;
+
+      const optsEl = document.getElementById('optionsContainer');
+      optsEl.innerHTML = '';
+
+      q.opts.forEach((optText, idx) => {
+        const isSel = userAnswers[curQ] === idx;
+        const row = document.createElement('div');
+        row.className = 'option-row' + (isSel ? ' selected' : '');
+        row.onclick = () => {
+          userAnswers[curQ] = idx;
+          renderQ();
+          renderPalette();
+        };
+        row.innerHTML = `
+          <input type="radio" name="optRadio" ${isSel ? 'checked' : ''} style="width:18px; height:18px; accent-color: var(--sky-500);">
+          <span>${optText}</span>
+        `;
+        optsEl.appendChild(row);
+      });
+
+      document.getElementById('btnPrevQ').disabled = (curQ === 0);
+      document.getElementById('btnNextQ').style.display = (curQ === activeQuestions.length - 1) ? 'none' : 'inline-block';
+    }
+
+    function stepQuestion(delta) {
+      curQ += delta;
+      if (curQ < 0) curQ = 0;
+      if (curQ >= activeQuestions.length) curQ = activeQuestions.length - 1;
+      renderQ();
+      renderPalette();
+    }
+
+    function renderPalette() {
+      const grid = document.getElementById('paletteNumbersGrid');
+      grid.innerHTML = '';
+      activeQuestions.forEach((_, idx) => {
+        const btn = document.createElement('button');
+        btn.className = 'p-btn';
+        if (idx === curQ) btn.classList.add('active');
+        if (userAnswers[idx] !== undefined) btn.classList.add('answered');
+        btn.innerText = idx + 1;
+        btn.onclick = () => {
+          curQ = idx;
+          renderQ();
+          renderPalette();
+        };
+        grid.appendChild(btn);
+      });
+    }
+
+    function submitExam() {
+      if (confirm("Kya aap apna test submit karna chahte hain?")) {
+        clearInterval(timerId);
+
+        let correct = 0;
+        let wrong = 0;
+        activeQuestions.forEach((q, idx) => {
+          if (userAnswers[idx] === q.ans) correct++;
+          else if (userAnswers[idx] !== undefined) wrong++;
+        });
+
+        const total = activeQuestions.length;
+        const percentage = Math.round((correct / total) * 100);
+
+        document.getElementById('resPercent').innerText = percentage + "%";
+        document.getElementById('resMarks').innerText = `${correct} / ${total}`;
+        document.getElementById('resCorrect').innerText = correct;
+        document.getElementById('resWrong').innerText = wrong;
+
+        const badge = document.getElementById('resStatusBadge');
+        if (percentage >= 40) {
+          badge.innerText = "Status: PASSED (Shaandar!)";
+          badge.style.color = "#16a34a";
+        } else {
+          badge.innerText = "Status: NEEDS IMPROVEMENT";
+          badge.style.color = "#dc2626";
+        }
+
+        navTo('result');
+      }
+    }
+
+    // COPY & VIEW EMAIL HELPER
+    function copyEmail() {
+      const email = "rthakur@gmail.com";
+      if (navigator.clipboard) {
+        navigator.clipboard.writeText(email);
+      }
+      alert("Aapka Email ID: " + email + "\n(Email copy ho gaya hai! Jahan bhi lagana ho wahan Paste kar sakti hain)");
+    }
+
+    // INIT
+    window.addEventListener('DOMContentLoaded', () => {
+      // Initialize saved email in localStorage if not set
+      if (!localStorage.getItem('thakur_riya_user_email')) {
+        localStorage.setItem('thakur_riya_user_email', 'rthakur@gmail.com');
+      }
+
+      const savedPhoto = localStorage.getItem('thakur_riya_user_photo');
+      if (savedPhoto) {
+        document.getElementById('userPhotoBox').innerHTML = '<img src="' + savedPhoto + '" alt="Profile">';
+      }
+      buildCategories('homeCategoriesGrid', categories);
+      buildCategories('allCategoriesGrid', categories);
+    });
+  </script>
+</body>
+</html>
